@@ -18,7 +18,8 @@ class InvoiceController extends Controller
 {
     public function index()
     {
-        $invoices = Invoice::with('customer', 'paymentMethod', 'repairStatus')->get();
+
+        $invoices = Invoice::with('customer', 'paymentMethod', 'repairStatus')->paginate(5);
         return view('Admin.pages.invoices.index', compact('invoices'));
     }
 

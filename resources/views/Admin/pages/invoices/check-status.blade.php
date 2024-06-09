@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,17 +8,18 @@
     <title>Check Repair Status</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
 </head>
+
 <body>
-    <div class="container">
+    <div class="container mt-3">
         <h1>Check Repair Status</h1>
 
         <form id="statusForm">
             @csrf
             <div class="form-group">
-                <label for="invoiceId">Invoice ID:</label>
+                <label for="invoiceId">Invoice Code:</label>
                 <input type="text" class="form-control" id="invoiceId" name="invoiceId" required>
             </div>
-            <button type="submit" class="btn btn-primary">Check Status</button>
+            <button type="submit" class="btn btn-primary mt-2">Check Status</button>
         </form>
 
         <div id="statusResult" class="mt-4"></div>
@@ -31,7 +33,7 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <p><strong>Invoice ID:</strong> <span id="modalInvoiceId"></span></p>
+                        <p><strong>Invoice Code:</strong> <span id="modalInvoiceId"></span></p>
                         <p><strong>Customer:</strong> <span id="modalCustomer"></span></p>
                         <p><strong>Date:</strong> <span id="modalDate"></span></p>
                         <p><strong>Total:</strong> <span id="modalTotal"></span></p>
@@ -48,6 +50,18 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script>
+        function formatRupiah(number) {
+            return 'Rp ' + number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+        }
+
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            const day = String(date.getDate()).padStart(2, '0');
+            const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are zero-indexed
+            const year = date.getFullYear();
+            return `${day}-${month}-${year}`;
+        }
+
         document.getElementById('statusForm').addEventListener('submit', function(event) {
             event.preventDefault();
 
@@ -55,33 +69,35 @@
             const token = document.querySelector('input[name="_token"]').value;
 
             fetch(`/invoices/${invoiceId}/status`, {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRF-TOKEN': token
-                }
-            })
-            .then(response => response.json())
-            .then(data => {
-                let resultDiv = document.getElementById('statusResult');
-                if (data.error) {
-                    resultDiv.innerHTML = `<div class="alert alert-danger">${data.error}</div>`;
-                } else {
-                    document.getElementById('modalInvoiceId').innerText = data.invoice_id;
-                    document.getElementById('modalCustomer').innerText = data.customer;
-                    document.getElementById('modalDate').innerText = data.date;
-                    document.getElementById('modalTotal').innerText = data.total;
-                    document.getElementById('modalGrandTotal').innerText = data.grand_total;
-                    document.getElementById('modalRepairStatus').innerText = data.status;
-                    var statusModal = new bootstrap.Modal(document.getElementById('statusModal'));
-                    statusModal.show();
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                resultDiv.innerHTML = `<div class="alert alert-danger">An error occurred while fetching the status.</div>`;
-            });
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': token
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    let resultDiv = document.getElementById('statusResult');
+                    if (data.error) {
+                        resultDiv.innerHTML = `<div class="alert alert-danger">${data.error}</div>`;
+                    } else {
+                        document.getElementById('modalInvoiceId').innerText = data.invoice_id;
+                        document.getElementById('modalCustomer').innerText = data.customer;
+                        document.getElementById('modalDate').innerText = formatDate(data.date);
+                        document.getElementById('modalTotal').innerText = formatRupiah(data.total);
+                        document.getElementById('modalGrandTotal').innerText = formatRupiah(data.grand_total);
+                        document.getElementById('modalRepairStatus').innerText = data.status;
+                        var statusModal = new bootstrap.Modal(document.getElementById('statusModal'));
+                        statusModal.show();
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    resultDiv.innerHTML =
+                        `<div class="alert alert-danger">An error occurred while fetching the status.</div>`;
+                });
         });
     </script>
 </body>
+
 </html>
