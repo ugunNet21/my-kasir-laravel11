@@ -12,6 +12,7 @@ use App\Models\Service;
 use App\Models\SparePart;
 use Illuminate\Http\Request;
 use PDF;
+use Illuminate\Support\Str;
 
 class InvoiceController extends Controller
 {
@@ -159,8 +160,11 @@ class InvoiceController extends Controller
         // Tampilkan PDF invoice menggunakan template PDF yang telah dibuat
         $pdf = PDF::loadView('Admin.pages.invoices.pdf', compact('invoice'));
 
+        // variable date for plus download invoice pdf
+        $date = date('Y-m-d');
+
         // Kembalikan PDF sebagai respons
-        return $pdf->stream('invoice.pdf');
+        return $pdf->stream('Invoice-' . $date . Str::random(3));
     }
 
     public function destroy(Invoice $invoice)

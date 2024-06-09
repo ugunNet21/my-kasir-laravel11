@@ -121,7 +121,7 @@
             </tbody>
         </table>
         <div class="total">
-            <h2>Total: Rp {{ number_format($invoice->grand_total, 0, ',', '.') }}</h2>
+            <h2>Grand Total: Rp {{ number_format($invoice->grand_total, 0, ',', '.') }}</h2>
         </div>
     </div>
     <div class="footer">
