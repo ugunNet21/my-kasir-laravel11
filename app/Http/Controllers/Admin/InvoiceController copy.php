@@ -153,21 +153,6 @@ class InvoiceController extends Controller
         // Render HTML view ke dalam string
         $html = view('Admin.pages.invoices.pdf', compact('invoice'))->render();
 
-        // Buat instance Dompdf
-        // $dompdf = new Dompdf();
-
-        // // Load HTML ke Dompdf
-        // $dompdf->loadHtml($html);
-
-        // // (Opsional) Atur ukuran dan orientasi halaman
-        // $dompdf->setPaper('4', 'portrait');
-
-        // // Render PDF
-        // $dompdf->render();
-
-        // // Kembalikan PDF sebagai respons
-        // return $dompdf->stream('invoice.pdf');
-
         // Tampilkan PDF invoice menggunakan template PDF yang telah dibuat
         $pdf = PDF::loadView('Admin.pages.invoices.pdf', compact('invoice'));
 

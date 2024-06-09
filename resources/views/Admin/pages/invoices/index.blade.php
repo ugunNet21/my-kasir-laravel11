@@ -1,7 +1,8 @@
-{{-- @extends('layouts.app') --}}
-
-{{-- @section('content') --}}
-<!DOCTYPE html>
+@extends('Admin.layouts.app')
+@section('title', 'Pages | Invoices')
+{{-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"> --}}
+@section('content')
+{{-- <!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -58,13 +59,14 @@
     </style>
 </head>
 
-<body>
-    <div class="container mt-5 mb-5">
+<body> --}}
+
+    <div class="container mt-1 mb-5">
         <div class="row">
             <div class="col-md-12">
                 <h1 class="text-center">Invoices</h1>
                 <div class="d-flex justify-content-end">
-                    <a href="{{ route('invoices.create') }}" class="btn btn-primary mb-3">Create Invoice</a>
+                    <a href="{{ route('invoices.create') }}" class="btn btn-primary mb-3" onclick="goCreate()" >Create Invoice</a>
                 </div>
                 @if (session('success'))
                 <div class="alert alert-success">
@@ -128,7 +130,7 @@
             </div>
         </div>
     </div>
-    <nav class="navbar bottom-nav">
+    {{-- <nav class="navbar bottom-nav">
         <div class="container-fluid">
             <ul class="nav d-flex w-100">
                 <li class="nav-item">
@@ -157,10 +159,15 @@
                 </li>
             </ul>
         </div>
-    </nav>
+    </nav> --}}
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-</body>
+    <script>
+        function goCreate() {
+        window.location.href = "{{ route('invoices.create') }}";
+    }
+    </script>
+{{-- </body>
 
-</html>
+</html> --}}
 
-{{-- @endsection --}}
+@endsection

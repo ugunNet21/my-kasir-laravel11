@@ -1,9 +1,10 @@
-<!DOCTYPE html>
+{{-- <!DOCTYPE html>
 <html>
+
 <head>
     <title>Create Invoice</title>
-    {{-- <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> --}}
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/css/bootstrap.min.css">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/css/bootstrap.min.css"> --}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <style>
         body {
@@ -14,7 +15,8 @@
             margin-top: 50px;
         }
 
-        h2, h4 {
+        h2,
+        h4 {
             margin-bottom: 20px;
         }
 
@@ -39,7 +41,7 @@
             color: white;
         }
 
-        .table-striped > tbody > tr:nth-of-type(odd) {
+        .table-striped>tbody>tr:nth-of-type(odd) {
             background-color: #f2f2f2;
         }
 
@@ -47,10 +49,14 @@
             margin-top: 20px;
         }
     </style>
-</head>
-<body>
+{{-- </head>
+
+<body> --}}
+    @extends('Admin.layouts.app')
+    @section('title', 'Create Invoice')
+    @section('content')
     <div class="container mt-5 mb-5">
-        <h2>Create Invoice</h2>
+        {{-- <h2>Create Invoice</h2> --}}
         @if ($errors->any())
             <div class="alert alert-danger">
                 <ul>
@@ -60,7 +66,11 @@
                 </ul>
             </div>
         @endif
+
         <form action="{{ route('invoices.store') }}" method="POST" id="invoice-form">
+            <div class="mt-3 mb-3">
+                <a href="{{ route('invoices.index') }}" class="btn btn-secondary" onclick="goBack()">Back</a>
+            </div>
             @csrf
             <div class="mb-3">
                 <label for="customer_id" class="form-label">Customer ID</label>
@@ -129,8 +139,10 @@
                     <tr>
                         <td><input type="text" name="items[0][description]" class="form-control" required></td>
                         <td><input type="number" name="items[0][quantity]" class="form-control quantity" required></td>
-                        <td><input type="number" name="items[0][unit_price]" class="form-control unit_price" required></td>
-                        <td><input type="number" name="items[0][total]" class="form-control item_total" readonly required></td>
+                        <td><input type="number" name="items[0][unit_price]" class="form-control unit_price" required>
+                        </td>
+                        <td><input type="number" name="items[0][total]" class="form-control item_total" readonly
+                                required></td>
                         <td><button type="button" class="btn btn-danger remove-item">Remove</button></td>
                     </tr>
                 </tbody>
@@ -138,13 +150,15 @@
             <button type="button" class="btn btn-success" id="add-item">Add Item</button>
             <button type="submit" class="btn btn-primary">Create Invoice</button>
         </form>
+
     </div>
 
+
     <script>
-        $(document).ready(function () {
+        $(document).ready(function() {
             let itemIndex = 1;
 
-            $('#add-item').click(function () {
+            $('#add-item').click(function() {
                 let newRow = `<tr>
                     <td><input type="text" name="items[${itemIndex}][description]" class="form-control" required></td>
                     <td><input type="number" name="items[${itemIndex}][quantity]" class="form-control quantity" required></td>
@@ -156,12 +170,12 @@
                 itemIndex++;
             });
 
-            $(document).on('click', '.remove-item', function () {
+            $(document).on('click', '.remove-item', function() {
                 $(this).closest('tr').remove();
                 calculateTotal();
             });
 
-            $(document).on('input', '.quantity, .unit_price', function () {
+            $(document).on('input', '.quantity, .unit_price', function() {
                 let row = $(this).closest('tr');
                 let quantity = row.find('.quantity').val();
                 let unit_price = row.find('.unit_price').val();
@@ -170,13 +184,13 @@
                 calculateTotal();
             });
 
-            $('#discount, #tax').on('input', function () {
+            $('#discount, #tax').on('input', function() {
                 calculateTotal();
             });
 
             function calculateTotal() {
                 let total = 0;
-                $('.item_total').each(function () {
+                $('.item_total').each(function() {
                     total += parseFloat($(this).val()) || 0;
                 });
                 $('#total').val(total);
@@ -188,5 +202,12 @@
             }
         });
     </script>
-</body>
-</html>
+    <script>
+        function goBack() {
+        window.history.back();
+    }
+    </script>
+    @endsection
+{{-- </body>
+
+</html> --}}
