@@ -88,10 +88,10 @@
             </div>
             <div class="customer-details">
                 <h3>Kepada:</h3>
-                <p>SMA Al-Ihsan Cimencrang</p>
-                <p>Jl. Cimincrang Jl. Cilameta No.13 Cimencrang - Kota. Bandung</p>
-                <p>Telepon: 098-765-4321</p>
-                <p>Email: gurusma.ibslabkom@gmail.com</p>
+                <p>{{ $invoice->customer->name }}</p>
+                <p>{{ $invoice->customer->address }}</p>
+                <p>{{ $invoice->customer->phone }}</p>
+                <p>{{ $invoice->customer->email }}</p>
             </div>
             <div class="invoice-details">
                 <h2>Invoice #{{ $invoice->id }}</h2>
