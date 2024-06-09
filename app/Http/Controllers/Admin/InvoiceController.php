@@ -12,7 +12,6 @@ use App\Models\Service;
 use App\Models\SparePart;
 use Illuminate\Http\Request;
 use PDF;
-use Dompdf\Dompdf;
 
 class InvoiceController extends Controller
 {
@@ -155,5 +154,30 @@ class InvoiceController extends Controller
         $invoice->items()->delete();
         $invoice->delete();
         return redirect()->route('invoices.index')->with('success', 'Invoice deleted successfully.');
+    }
+    public function indexStatus()
+    {
+        return view('Admin.pages.invoices.check-status');
+    }
+    public function checkStatus($id)
+    {
+        $invoice = Invoice::with('repairStatus')->find($id);
+
+        if (!$invoice) {
+            return response()->json(['error' => 'Invoice not found'], 404);
+        }
+
+        return response()->json([
+            'status' => $invoice->repairStatus->status,
+            'invoice_id' => $invoice->id,
+            'customer' => $invoice->customer->name,
+            'date' => $invoice->date,
+            'total' => $invoice->total,
+            'grand_total' => $invoice->grand_total,
+        ]);
+
+        // return view('Admin.pages.invoices.check-status', compact('invoice'));
+
+        // return response()->json(['status' => $invoice->repairStatus->name]);
     }
 }

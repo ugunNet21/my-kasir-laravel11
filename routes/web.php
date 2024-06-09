@@ -28,5 +28,6 @@ Route::resource('repairstatuses', RepairStatusController::class);
 Route::resource('categories', CategoryController::class);
 Route::resource('taxes', TaxController::class);
 Route::get('print-invoices/{invoice}/print-pdf', [InvoiceController::class, 'printPdf'])->name('print.invoices');
-// Route::get('/invoices/{invoice}/print-pdf', 'InvoiceController@printInvoicePdf')->name('invoices.printPdf');
+Route::get('/invoices-status', [InvoiceController::class, 'indexStatus'])->name('invoices.checkStatus');
+Route::get('/invoices/{id}/status', [InvoiceController::class, 'checkStatus'])->name('invoices.checkStatus');
 
