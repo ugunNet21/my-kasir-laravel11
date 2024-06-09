@@ -32,24 +32,6 @@ class InvoiceController extends Controller
         return view('Admin.pages.invoices.create', compact('customers', 'services', 'spareParts', 'paymentMethods', 'repairStatuses'));
     }
 
-    public function storeDu(Request $request)
-    {
-        $request->validate([
-            'customer_id' => 'required',
-            'date' => 'required|date',
-            'status' => 'required',
-            'total' => 'required|numeric',
-            'payment_method_id' => 'required',
-            'repair_status_id' => 'required',
-            'discount' => 'nullable|numeric',
-            'tax' => 'nullable|numeric',
-            'grand_total' => 'required|numeric',
-        ]);
-
-        $invoice = Invoice::create($request->all());
-
-        return redirect()->route('invoices.index')->with('success', 'Invoice created successfully.');
-    }
     public function store(Request $request)
     {
         // Validasi data dari request
@@ -114,23 +96,55 @@ class InvoiceController extends Controller
         return view('Admin.pages.invoices.edit', compact('invoice', 'customers', 'services', 'spareParts', 'paymentMethods', 'repairStatuses'));
     }
 
-    public function update(Request $request, Invoice $invoice)
+    // Memperbarui faktur di database
+    public function update(Request $request, $id)
     {
-        $request->validate([
-            'customer_id' => 'required',
+        // Validasi data dari request
+        $validatedData = $request->validate([
+            'customer_id' => 'required|integer',
             'date' => 'required|date',
-            'status' => 'required',
+            'status' => 'required|string',
             'total' => 'required|numeric',
-            'payment_method_id' => 'required',
-            'repair_status_id' => 'required',
+            'payment_method_id' => 'required|integer',
+            'repair_status_id' => 'nullable|integer',
             'discount' => 'nullable|numeric',
             'tax' => 'nullable|numeric',
             'grand_total' => 'required|numeric',
+            'items' => 'required|array',
+            'items.*.description' => 'required|string',
+            'items.*.quantity' => 'required|integer',
+            'items.*.unit_price' => 'required|numeric',
+            'items.*.total' => 'required|numeric',
         ]);
 
-        $invoice->update($request->all());
-        // Perbarui item-item invoice disini
+        // Memperbarui Invoice
+        $invoice = Invoice::findOrFail($id);
+        $invoice->update([
+            'customer_id' => $validatedData['customer_id'],
+            'date' => $validatedData['date'],
+            'status' => $validatedData['status'],
+            'total' => $validatedData['total'],
+            'payment_method_id' => $validatedData['payment_method_id'],
+            'repair_status_id' => $validatedData['repair_status_id'],
+            'discount' => $validatedData['discount'],
+            'tax' => $validatedData['tax'],
+            'grand_total' => $validatedData['grand_total'],
+        ]);
 
+        // Hapus item lama dan tambahkan item baru
+        InvoiceItem::where('invoice_id', $id)->delete();
+        foreach ($validatedData['items'] as $item) {
+            InvoiceItem::create([
+                'invoice_id' => $invoice->id,
+                'description' => $item['description'],
+                'quantity' => $item['quantity'],
+                'unit_price' => $item['unit_price'],
+                'total' => $item['total'],
+            ]);
+        }
+
+        // Mengembalikan respon sukses
+        // return response()->json(['message' => 'Invoice updated successfully!', 'invoice' => $invoice], 200);
         return redirect()->route('invoices.index')->with('success', 'Invoice updated successfully.');
     }
 
@@ -161,23 +175,28 @@ class InvoiceController extends Controller
     }
     public function checkStatus($id)
     {
-        $invoice = Invoice::with('repairStatus')->find($id);
+        try {
+            $invoice = Invoice::with('repairStatus')->find($id);
 
-        if (!$invoice) {
-            return response()->json(['error' => 'Invoice not found'], 404);
+            try {
+                if (!$invoice) {
+                    return response()->json(['error' => 'Invoice not found'], 404);
+                }
+            } catch (\Exception $e) {
+                return redirect()->back()->with('error', $e->getMessage());
+            }
+
+            return response()->json([
+                'status' => $invoice->repairStatus->status,
+                'invoice_id' => $invoice->id,
+                'customer' => $invoice->customer->name,
+                'date' => $invoice->date,
+                'total' => $invoice->total,
+                'grand_total' => $invoice->grand_total,
+            ]);
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', $e->getMessage());
         }
 
-        return response()->json([
-            'status' => $invoice->repairStatus->status,
-            'invoice_id' => $invoice->id,
-            'customer' => $invoice->customer->name,
-            'date' => $invoice->date,
-            'total' => $invoice->total,
-            'grand_total' => $invoice->grand_total,
-        ]);
-
-        // return view('Admin.pages.invoices.check-status', compact('invoice'));
-
-        // return response()->json(['status' => $invoice->repairStatus->name]);
     }
 }
