@@ -9,6 +9,9 @@
 
 ## Screenshoot
 
+![image](https://github.com/ugunNet21/my-kasir-laravel11/assets/45864165/dc3bf294-5538-44a5-b3a9-4cf599efd3d4)
+
+
 ![image](https://github.com/ugunNet21/my-kasir-laravel11/assets/45864165/79fe463a-0001-4692-b771-4771d916ca02)
 
 
