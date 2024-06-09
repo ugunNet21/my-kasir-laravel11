@@ -9,7 +9,8 @@ class PaymentMethod extends Model
 {
     use HasFactory;
     protected $fillable = ['method'];
-    public function invoice(){
+    public function invoices()
+    {
         return $this->hasMany(Invoice::class);
     }
 }

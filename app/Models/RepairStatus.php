@@ -9,7 +9,8 @@ class RepairStatus extends Model
 {
     use HasFactory;
     protected $fillable = ['status'];
-    public function invoices(){
+    public function invoices()
+    {
         return $this->hasMany(Invoice::class);
     }
 }
