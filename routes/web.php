@@ -27,3 +27,6 @@ Route::resource('paymentmethods', PaymentMethodController::class);
 Route::resource('repairstatuses', RepairStatusController::class);
 Route::resource('categories', CategoryController::class);
 Route::resource('taxes', TaxController::class);
+Route::get('print-invoices/{invoice}/print-pdf', [InvoiceController::class, 'printPdf'])->name('print.invoices');
+// Route::get('/invoices/{invoice}/print-pdf', 'InvoiceController@printInvoicePdf')->name('invoices.printPdf');
+

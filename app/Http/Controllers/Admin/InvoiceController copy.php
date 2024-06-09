@@ -19,6 +19,7 @@ class InvoiceController extends Controller
     public function index()
     {
         $invoices = Invoice::with('customer', 'paymentMethod', 'repairStatus')->get();
+        // dd($invoices);
         return view('Admin.pages.invoices.index', compact('invoices'));
     }
 
@@ -29,7 +30,8 @@ class InvoiceController extends Controller
         $spareParts = SparePart::all();
         $paymentMethods = PaymentMethod::all();
         $repairStatuses = RepairStatus::all();
-
+        // dd($paymentMethods);
+        // dd($repairStatuses);
         return view('Admin.pages.invoices.create', compact('customers', 'services', 'spareParts', 'paymentMethods', 'repairStatuses'));
     }
 
@@ -48,6 +50,9 @@ class InvoiceController extends Controller
         ]);
 
         $invoice = Invoice::create($request->all());
+
+        // dd($invoice);
+        // Simpan item-item invoice disini
 
         return redirect()->route('invoices.index')->with('success', 'Invoice created successfully.');
     }
@@ -95,11 +100,16 @@ class InvoiceController extends Controller
             ]);
         }
 
+        // Mengembalikan respon sukses
+        // return response()->json(['message' => 'Invoice created successfully!', 'invoice' => $invoice], 201);
         return redirect()->route('invoices.index')->with('success', 'Invoice created successfully.');
     }
 
     public function show(Invoice $invoice) //Invoice
     {
+        // $invoice->load('items');
+        // $invoice = Invoice::with('items')->find($id);
+        // $invoice = Invoice::findOrFail($id);
         return view('Admin.pages.invoices.show', compact('invoice'));
     }
 
@@ -142,6 +152,21 @@ class InvoiceController extends Controller
 
         // Render HTML view ke dalam string
         $html = view('Admin.pages.invoices.pdf', compact('invoice'))->render();
+
+        // Buat instance Dompdf
+        // $dompdf = new Dompdf();
+
+        // // Load HTML ke Dompdf
+        // $dompdf->loadHtml($html);
+
+        // // (Opsional) Atur ukuran dan orientasi halaman
+        // $dompdf->setPaper('4', 'portrait');
+
+        // // Render PDF
+        // $dompdf->render();
+
+        // // Kembalikan PDF sebagai respons
+        // return $dompdf->stream('invoice.pdf');
 
         // Tampilkan PDF invoice menggunakan template PDF yang telah dibuat
         $pdf = PDF::loadView('Admin.pages.invoices.pdf', compact('invoice'));
