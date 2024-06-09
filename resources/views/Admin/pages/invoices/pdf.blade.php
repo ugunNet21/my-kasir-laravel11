@@ -94,7 +94,8 @@
                 <p>{{ $invoice->customer->email }}</p>
             </div>
             <div class="invoice-details">
-                <h2>Invoice #{{ $invoice->id }}</h2>
+                {{-- <h2>Invoice #{{ $invoice->id }}</h2> --}}
+                <h2>Invoice #{{ $invoice->id }}{{ \Illuminate\Support\Str::random(5) }}</h2>
                 <p>Tanggal: {{ \Carbon\Carbon::parse($invoice->date)->format('d F Y') }}</p>
                 <p>Status: <span class="paid">{{ $invoice->status }}</span></p>
             </div>
