@@ -8,7 +8,7 @@
             src="https://img.freepik.com/free-vector/isolated-young-handsome-man-different-poses-white-background-illustration_632498-859.jpg"
             alt="Profile Picture"
         />
-        <span class="profile-name">John Doe</span>
+        <span class="profile-name">Admin Kasir</span>
     </div>
     <div class="theme-toggle">
         <div class="hamburger" id="hamburger">&#9776;</div>
