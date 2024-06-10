@@ -1,21 +1,12 @@
-{{-- @extends('layouts.app') --}}
+@extends('Admin.layouts.app')
+@section('title', 'Edit Taxes')
+@section('content')
 
-{{-- @section('content') --}}
-   <!DOCTYPE html>
-   <html lang="en">
-   <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    @include('Admin.partials.styles')
-   </head>
-   <body>
-    <div class="container">
-        <h1>Edit Tax</h1>
-        <form action="{{ route('taxes.update', $tax->id) }}" method="POST">
-            @csrf
-            @method('PUT')
+    <h1>Edit Tax</h1>
+    <form action="{{ route('taxes.update', $tax->id) }}" method="POST">
+        @csrf
+        @method('PUT')
+        <div class="mb-3">
             <div class="form-group">
                 <label for="name">Name:</label>
                 <input type="text" name="name" class="form-control" value="{{ $tax->name }}" required>
@@ -24,9 +15,8 @@
                 <label for="rate">Rate:</label>
                 <input type="number" name="rate" class="form-control" value="{{ $tax->rate }}" required>
             </div>
-            <button type="submit" class="btn btn-primary">Update Tax</button>
-        </form>
-    </div>
-   </body>
-   </html>
-{{-- @endsection --}}
+        </div>
+        <button type="submit" class="btn btn-primary">Update Tax</button>
+    </form>
+
+@endsection

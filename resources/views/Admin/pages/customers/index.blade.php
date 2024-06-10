@@ -1,7 +1,7 @@
-{{-- @extends('layouts.app') --}}
-
-{{-- @section('content') --}}
-    <!DOCTYPE html>
+@extends('Admin.layouts.app')
+@section('title', 'Customer')
+@section('content')
+    {{-- <!DOCTYPE html>
     <html lang="en">
     <head>
         <meta charset="UTF-8">
@@ -9,9 +9,9 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>Document</title>
         @include('Admin.partials.styles')
-    </head>
+    </head> --}}
     <body>
-        <div class="container">
+        {{-- <div class="container"> --}}
             <h1>Customers</h1>
             <a href="{{ route('customers.create') }}" class="btn btn-primary">Add Customer</a>
             <table class="table mt-3">
@@ -44,7 +44,7 @@
                     @endforeach
                 </tbody>
             </table>
-        </div>
+        {{-- </div> --}}
     </body>
-    </html>
-{{-- @endsection --}}
+    {{-- </html> --}}
+@endsection

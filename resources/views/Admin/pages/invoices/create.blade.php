@@ -1,61 +1,53 @@
-{{-- <!DOCTYPE html>
-<html>
 
-<head>
-    <title>Create Invoice</title>
-    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/css/bootstrap.min.css"> --}}
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <style>
-        body {
-            background-color: #f8f9fa;
-        }
+@extends('Admin.layouts.app')
+@section('title', 'Create Invoice')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<style>
+    body {
+        background-color: #f8f9fa;
+    }
 
-        .container {
-            margin-top: 50px;
-        }
+    .container {
+        margin-top: 50px;
+    }
 
-        h2,
-        h4 {
-            margin-bottom: 20px;
-        }
+    h2,
+    h4 {
+        margin-bottom: 20px;
+    }
 
-        .form-label {
-            font-weight: bold;
-        }
+    .form-label {
+        font-weight: bold;
+    }
 
-        .form-control[readonly] {
-            background-color: #e9ecef;
-        }
+    .form-control[readonly] {
+        background-color: #e9ecef;
+    }
 
-        .card {
-            border: none;
-            border-radius: 0.75rem;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            margin-bottom: 20px;
-            padding: 20px;
-        }
+    .card {
+        border: none;
+        border-radius: 0.75rem;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+        padding: 20px;
+    }
 
-        .table thead th {
-            background-color: #343a40;
-            color: white;
-        }
+    .table thead th {
+        background-color: #343a40;
+        color: white;
+    }
 
-        .table-striped>tbody>tr:nth-of-type(odd) {
-            background-color: #f2f2f2;
-        }
+    .table-striped>tbody>tr:nth-of-type(odd) {
+        background-color: #f2f2f2;
+    }
 
-        .table-responsive {
-            margin-top: 20px;
-        }
-    </style>
-{{-- </head>
+    .table-responsive {
+        margin-top: 20px;
+    }
+</style>
 
-<body> --}}
-    @extends('Admin.layouts.app')
-    @section('title', 'Create Invoice')
-    @section('content')
-    <div class="container mt-5 mb-5">
+@section('content')
+    <div class="mt-5 mb-5">
         {{-- <h2>Create Invoice</h2> --}}
         @if ($errors->any())
             <div class="alert alert-danger">
@@ -141,8 +133,8 @@
                         <td><input type="number" name="items[0][quantity]" class="form-control quantity" required></td>
                         <td><input type="number" name="items[0][unit_price]" class="form-control unit_price" required>
                         </td>
-                        <td><input type="number" name="items[0][total]" class="form-control item_total" readonly
-                                required></td>
+                        <td><input type="number" name="items[0][total]" class="form-control item_total" readonly required>
+                        </td>
                         <td><button type="button" class="btn btn-danger remove-item">Remove</button></td>
                     </tr>
                 </tbody>
@@ -204,10 +196,7 @@
     </script>
     <script>
         function goBack() {
-        window.history.back();
-    }
+            window.history.back();
+        }
     </script>
-    @endsection
-{{-- </body>
-
-</html> --}}
+@endsection

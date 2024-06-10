@@ -1,54 +1,51 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Edit Invoice</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/css/bootstrap.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <style>
-        body {
-            background-color: #f8f9fa;
-        }
+@extends('Admin.layouts.app')
+@section('title', 'Edit | Invoices')
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/css/bootstrap.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<style>
+    body {
+        background-color: #f8f9fa;
+    }
 
-        .container {
-            margin-top: 50px;
-        }
+    .container {
+        margin-top: 50px;
+    }
 
-        h2, h4 {
-            margin-bottom: 20px;
-        }
+    h2, h4 {
+        margin-bottom: 20px;
+    }
 
-        .form-label {
-            font-weight: bold;
-        }
+    .form-label {
+        font-weight: bold;
+    }
 
-        .form-control[readonly] {
-            background-color: #e9ecef;
-        }
+    .form-control[readonly] {
+        background-color: #e9ecef;
+    }
 
-        .card {
-            border: none;
-            border-radius: 0.75rem;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            margin-bottom: 20px;
-            padding: 20px;
-        }
+    .card {
+        border: none;
+        border-radius: 0.75rem;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+        padding: 20px;
+    }
 
-        .table thead th {
-            background-color: #343a40;
-            color: white;
-        }
+    .table thead th {
+        background-color: #343a40;
+        color: white;
+    }
 
-        .table-striped > tbody > tr:nth-of-type(odd) {
-            background-color: #f2f2f2;
-        }
+    .table-striped > tbody > tr:nth-of-type(odd) {
+        background-color: #f2f2f2;
+    }
 
-        .table-responsive {
-            margin-top: 20px;
-        }
-    </style>
-</head>
-<body>
-    <div class="container mt-5 mb-5">
+    .table-responsive {
+        margin-top: 20px;
+    }
+</style>
+@section('content')
+    <div class="mt-5 mb-5">
         <h2>Edit Invoice</h2>
         @if ($errors->any())
             <div class="alert alert-danger">
@@ -199,5 +196,4 @@
             calculateTotal();
         });
     </script>
-</body>
-</html>
+@endsection

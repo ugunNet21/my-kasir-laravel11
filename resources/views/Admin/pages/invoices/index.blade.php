@@ -1,66 +1,6 @@
 @extends('Admin.layouts.app')
 @section('title', 'Pages | Invoices')
-{{-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"> --}}
 @section('content')
-{{-- <!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Invoices</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
-    <style>
-        body {
-            background-color: #f8f9fa;
-        }
-
-        h1 {
-            margin: 20px 0;
-        }
-
-        .card {
-            margin-top: 20px;
-            border: none;
-            border-radius: 0.75rem;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .table-striped > tbody > tr:nth-of-type(odd) {
-            background-color: #f2f2f2;
-        }
-
-        .btn-sm {
-            margin: 2px;
-        }
-
-        .bottom-nav {
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-            background-color: #fff;
-            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
-            z-index: 1000;
-        }
-
-        .bottom-nav .nav-link {
-            color: #000;
-        }
-
-        .bottom-nav .nav-link:hover {
-            color: #007bff;
-        }
-
-        .bottom-nav .nav-item {
-            flex: 1;
-            text-align: center;
-        }
-    </style>
-</head>
-
-<body> --}}
-
     <div class="mt-1 mb-5">
         <div class="row">
             <div class="col-md-12">
@@ -166,8 +106,4 @@
         window.location.href = "{{ route('invoices.create') }}";
     }
     </script>
-{{-- </body>
-
-</html> --}}
-
 @endsection
