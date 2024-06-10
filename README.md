@@ -9,7 +9,8 @@
 
 ## Screenshoot
 
-![image](https://github.com/ugunNet21/my-kasir-laravel11/assets/45864165/dc3bf294-5538-44a5-b3a9-4cf599efd3d4)
+![image](https://github.com/ugunNet21/my-kasir-laravel11/assets/45864165/dc37ceff-1108-4e9e-bb74-5cdab9e00dcf)
+
 
 ![image](https://github.com/ugunNet21/my-kasir-laravel11/assets/45864165/82ddb51c-6f95-4f8d-9016-3253d68d9724)
 
