@@ -10,7 +10,7 @@
 </head>
 
 <body>
-    <div class="container">
+    {{-- <div class="container"> --}}
         <!-- sidebar -->
         @include('Admin.partials.sidebar')
         <!-- end sidebar -->
@@ -23,7 +23,7 @@
         @yield('content')
         </main>
         <!-- end main content -->
-    </div>
+    {{-- </div> --}}
     <!--bottom nav-->
     @include('Admin.partials.bottomnav')
     <!--end bottom nav-->

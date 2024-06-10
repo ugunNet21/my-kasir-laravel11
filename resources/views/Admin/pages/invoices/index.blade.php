@@ -61,7 +61,7 @@
 
 <body> --}}
 
-    <div class="container mt-1 mb-5">
+    <div class="mt-1 mb-5">
         <div class="row">
             <div class="col-md-12">
                 <h1 class="text-center">Invoices</h1>
