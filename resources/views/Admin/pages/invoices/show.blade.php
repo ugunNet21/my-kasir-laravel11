@@ -1,20 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Show Invoice</title>
+@extends('Admin.layouts.app')
+@section('title', 'Details | Invoices')
+@section('content')
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.2/css/bootstrap.min.css">
     <style>
         body {
             background-color: #f8f9fa;
         }
 
-        .container {
+        /* .container {
             margin-top: 50px;
-        }
+        } */
 
         h2, h4 {
             margin-bottom: 20px;
@@ -49,10 +44,8 @@
             margin-top: 20px;
         }
     </style>
-</head>
 
-<body>
-    <div class="container">
+    <div class="mt-3">
         <h2 class="text-center">Invoice Details</h2>
         <div class="card">
             <div class="mb-3">
@@ -94,7 +87,7 @@
         </div>
 
         <h4>Items</h4>
-        <div class="card">
+        <div class="card mb-5">
             <div class="table-responsive">
                 <table class="table table-striped">
                     <thead>
@@ -120,6 +113,4 @@
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-
-</html>
+@endsection
