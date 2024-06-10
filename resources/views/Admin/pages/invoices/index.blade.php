@@ -1,70 +1,12 @@
-{{-- @extends('layouts.app') --}}
-
-{{-- @section('content') --}}
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Invoices</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
-    <style>
-        body {
-            background-color: #f8f9fa;
-        }
-
-        h1 {
-            margin: 20px 0;
-        }
-
-        .card {
-            margin-top: 20px;
-            border: none;
-            border-radius: 0.75rem;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .table-striped > tbody > tr:nth-of-type(odd) {
-            background-color: #f2f2f2;
-        }
-
-        .btn-sm {
-            margin: 2px;
-        }
-
-        .bottom-nav {
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-            background-color: #fff;
-            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
-            z-index: 1000;
-        }
-
-        .bottom-nav .nav-link {
-            color: #000;
-        }
-
-        .bottom-nav .nav-link:hover {
-            color: #007bff;
-        }
-
-        .bottom-nav .nav-item {
-            flex: 1;
-            text-align: center;
-        }
-    </style>
-</head>
-
-<body>
-    <div class="container mt-5 mb-5">
+@extends('Admin.layouts.app')
+@section('title', 'Pages | Invoices')
+@section('content')
+    <div class="mt-1 mb-5">
         <div class="row">
             <div class="col-md-12">
                 <h1 class="text-center">Invoices</h1>
                 <div class="d-flex justify-content-end">
-                    <a href="{{ route('invoices.create') }}" class="btn btn-primary mb-3">Create Invoice</a>
+                    <a href="{{ route('invoices.create') }}" class="btn btn-primary mb-3" onclick="goCreate()" >Create Invoice</a>
                 </div>
                 @if (session('success'))
                 <div class="alert alert-success">
@@ -128,7 +70,7 @@
             </div>
         </div>
     </div>
-    <nav class="navbar bottom-nav">
+    {{-- <nav class="navbar bottom-nav">
         <div class="container-fluid">
             <ul class="nav d-flex w-100">
                 <li class="nav-item">
@@ -157,10 +99,11 @@
                 </li>
             </ul>
         </div>
-    </nav>
+    </nav> --}}
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-
-</html>
-
-{{-- @endsection --}}
+    <script>
+        function goCreate() {
+        window.location.href = "{{ route('invoices.create') }}";
+    }
+    </script>
+@endsection
