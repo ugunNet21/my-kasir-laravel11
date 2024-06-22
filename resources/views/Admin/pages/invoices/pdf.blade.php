@@ -105,7 +105,7 @@
             </div>
             <div class="invoice-details">
                 <h2>Invoice #{{ $invoice->id }}{{ \Illuminate\Support\Str::random(5) }}</h2>
-                <p>Tanggal: {{ \Carbon\Carbon::parse($invoice->date)->format('d F Y') }}</p>
+				<p>Tanggal: {{ \Carbon\Carbon::parse($invoice->date)->locale('id')->isoFormat('D MMMM Y') }}</p>
                 <p>Status: <span class="paid">{{ $invoice->status }}</span></p>
             </div>
         </div>

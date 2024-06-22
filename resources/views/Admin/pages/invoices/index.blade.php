@@ -38,7 +38,7 @@
                                         <td>{{ $loop->iteration }}</td>
                                         {{-- <td>{{ $invoice->id }}</td> --}}
                                         <td>{{ $invoice->customer->name }}</td>
-                                        <td>{{ $invoice->date }}</td>
+										<td>{{ \Carbon\Carbon::parse($invoice->date)->locale('id')->isoFormat('D MMMM Y') }}</td>
                                         <td>{{ $invoice->status }}</td>
                                         <td>Rp.{{ number_format($invoice->total, 0, ',', '.' )}}</td>
                                         <td>{{ $invoice->paymentMethod->method }}</td>

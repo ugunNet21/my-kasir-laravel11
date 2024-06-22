@@ -54,7 +54,7 @@
             </div>
             <div class="mb-3">
                 <label for="date" class="form-label">Date</label>
-                <input type="text" class="form-control" id="date" value="{{ \Carbon\Carbon::parse($invoice->date)->format('d F Y') }}" readonly>
+                <input type="text" class="form-control" id="date" value="{{ \Carbon\Carbon::parse($invoice->date)->locale('id')->isoFormat('D MMMM Y') }}" readonly>
             </div>
             <div class="mb-3">
                 <label for="status" class="form-label">Status</label>
